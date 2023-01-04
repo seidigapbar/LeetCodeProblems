@@ -1,3 +1,36 @@
+# Best solution I could come up with:
+
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        const int MAXLENGTH = s.size();
+        int indices[26], result = MAXLENGTH;
+        fill(indices, indices+26, MAXLENGTH);
+
+        for (auto i = 0; i < MAXLENGTH; i++){
+            if(indices[s[i] - 97] == MAXLENGTH){
+                indices[s[i] - 97] = i;
+            }
+            else{
+                indices[s[i] - 97] = -1;
+            }
+        }
+        
+        for (auto x : indices){
+            if (x != -1){
+                result = min(x, result);
+            }
+        }
+        
+        if (result == MAXLENGTH)
+            return -1;
+        
+        return result;
+    }
+};
+
+# My first solution:
+
 class Solution {
 public:
     int firstUniqChar(string s) {
